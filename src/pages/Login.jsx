@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword, signInWithRedirect, getRedirectResult, onAuthStateChanged } from 'firebase/auth';
-import { auth, provider } from '../firebase';  // Ensure provider is correctly initialized in your Firebase setup
-import { FaGoogle } from 'react-icons/fa'; // Google icon from React Icons
+import { auth, provider } from '../firebase';  
+import { FaGoogle } from 'react-icons/fa'; 
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -11,7 +11,6 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  // Handle redirect result
   useEffect(() => {
     const getResult = async () => {
       try {
@@ -19,7 +18,7 @@ const Login = () => {
         if (result) {
           const user = result.user;
           console.log('Logged in with Google:', user);
-          navigate('/dashboard');  // Navigate to dashboard after successful login
+          navigate('/dashboard');  
         }
       } catch (err) {
         console.error(err);
@@ -27,18 +26,16 @@ const Login = () => {
       }
     };
 
-    // Trigger the result check when component mounts
     getResult();
 
-    // Optionally, set up a listener to detect auth state changes
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         console.log('User authenticated:', user);
-        navigate('/dashboard');  // If the user is authenticated, navigate to dashboard
+        navigate('/dashboard');  
       }
     });
 
-    return () => unsubscribe(); // Cleanup on unmount
+    return () => unsubscribe(); 
   }, [navigate]);
 
   const handleLogin = async (e) => {
@@ -58,7 +55,7 @@ const Login = () => {
 
   const handleGoogleSignIn = async () => {
     try {
-      await signInWithRedirect(auth, provider); // Initiate Google sign-in flow
+      await signInWithRedirect(auth, provider); 
     } catch (err) {
       setError('Failed to log in with Google');
       console.error(err);
