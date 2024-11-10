@@ -3,7 +3,7 @@ import React from 'react'
 function Footer() {
   return (
     <div className='bg-gray-900 h-screen text-white flex flex-col p-12 justify-center items-center'>
-        <h1 className='text-4xl'>
+        <h1 className='text-6xl'>
             FEW WORDS ...
         </h1>     
        <center>

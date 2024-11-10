@@ -1,4 +1,6 @@
 import React from 'react'
+import App from '../App'
+import { Link } from 'react-router-dom'
 
 function Navbar() {
   return (
@@ -7,11 +9,11 @@ function Navbar() {
             CRAFT LEARNERS
         </div>
 
-        <div className='flex'>
+       <Link to='/login'> <div className='flex'>
             <a href="#" className='bg-button-color py-2 px-4 rounded-tr-2xl rounded-bl-2xl rounded-tl-md rounded-br-md '>
                 <p className='text-white text-xl'>GET STARTED</p>
             </a>
-        </div>
+        </div></Link>
     </div>
   )
 }
