@@ -6,3 +6,7 @@
 * {
 font-family: 'Cubano', sans-serif;
 }
+
+form > input {
+    font-family: sans-serif;
+}

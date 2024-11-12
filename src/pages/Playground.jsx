@@ -1,6 +1,8 @@
 import React, { useRef, useState } from 'react';
 import { Editor } from '@monaco-editor/react';
 import axios from 'axios';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from '../firebase';
 
 function Playground() {
   const [output, setOutput] = useState('');
@@ -31,34 +33,35 @@ function Playground() {
         setLoading(false);
       })
       .catch((err) => {
-        setOutput(err);
+        setOutput('Error: ' + err.message);
         setLoading(false);
       });
   };
 
   return (
-    <div className="h-screen flex flex-col lg:flex-row">
-      <div className="w-full lg:w-3/5 p-4 relative">
-        <h1 className="text-xl font-bold mb-4">Editor</h1>
-
-        {/* only python for now */}
+    <div className="flex flex-col items-center justify-center w-full max-w-2xl mx-auto p-4">
+      <div className="w-full mb-4">
+        <h1 className="text-center text-lg font-bold mb-2">Code Playground</h1>
         <Editor
-          height="70vh"
+          height="50vh"
           defaultLanguage="python"
-          defaultValue="# code goes here"
+          defaultValue="# Start coding..."
           onMount={handleEditorDidMount}
+          className="border rounded"
         />
         <button
-          className="absolute top-4 right-8 px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 block w-full"
           onClick={executeCode}
         >
           Run
         </button>
       </div>
 
-      <div className="w-full lg:w-2/5 p-4 border-t lg:border-l lg:border-gray-300 mt-4 lg:mt-0">
-        <h1 className="text-xl font-bold">Output</h1>
-        {loading ? <p>...running...</p> : <p>{output}</p>}
+      <div className="w-full mt-4 border-t pt-4">
+        <h2 className="text-center text-lg font-bold">Output</h2>
+        <div className="p-2 border rounded bg-gray-50 ">
+          {loading ? <p>...running...</p> : <pre className='overflow-hidden'>{output}</pre>}
+        </div>
       </div>
     </div>
   );

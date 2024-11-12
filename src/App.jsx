@@ -28,7 +28,14 @@ const App = () => {
             </PrivateRoute>
           }
         />
-        <Route path="/playground" element={<Playground />} />
+         <Route
+          path="/playground"
+          element={
+            <PrivateRoute>
+              <Playground />
+            </PrivateRoute>
+          }
+        />
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </Router>
